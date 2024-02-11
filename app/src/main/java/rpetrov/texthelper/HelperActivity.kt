@@ -21,6 +21,7 @@ import android.widget.Toast
 import android.widget.ViewAnimator
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -110,15 +111,17 @@ class HelperActivity : AppCompatActivity() {
     }
 
     private fun showPanel(word: String){
-        if(findViewById<FrameLayout>(R.id.panel).translationY != 0F ) return
-
-        with(ValueAnimator.ofFloat(0F, -findViewById<FrameLayout>(R.id.panel).height.toFloat())){
-            addUpdateListener {
-                findViewById<FrameLayout>(R.id.panel).translationY = it.animatedValue as Float
-            }
-            duration = 300
-            start()
-        }
+        val bottomSheetBehaviour = BottomSheetBehavior.from(findViewById(R.id.containerBottomSheet))
+        bottomSheetBehaviour.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+//        if(findViewById<FrameLayout>(R.id.panel).translationY != 0F ) return
+//
+//        with(ValueAnimator.ofFloat(0F, -findViewById<FrameLayout>(R.id.panel).height.toFloat())){
+//            addUpdateListener {
+//                findViewById<FrameLayout>(R.id.panel).translationY = it.animatedValue as Float
+//            }
+//            duration = 300
+//            start()
+//        }
 
         wikiService.search(word).enqueue(object : Callback<WikiResponse?> {
             override fun onResponse(call: Call<WikiResponse?>, response: Response<WikiResponse?>) {
