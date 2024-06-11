@@ -3,7 +3,7 @@ package rpetrov.texthelper.wiki
 
 import com.google.gson.annotations.SerializedName
 
-data class WikiResponse(
+data class WikiModel(
     @SerializedName("parse")
     val parse: Parse,
     @SerializedName("warnings")
